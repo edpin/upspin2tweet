@@ -18,3 +18,7 @@ Things TODO:
 - Pull out the HTML templates from the code.
 - Change a bunch of hard-coded paths in `main.go` to flags.
 - Better deploy scripts (perhaps, Dockerize it?).
+
+
+Disclaimers: This code is provided as-is. It is in no way associated with my 
+employer. And it is not maintained by the Upspin team in any way.
