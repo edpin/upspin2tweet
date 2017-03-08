@@ -17,7 +17,9 @@ This is the full code backing up the live app, except for:
 Things TODO:
 - Pull out the HTML templates from the code.
 - Change a bunch of hard-coded paths in `main.go` to flags.
-- Better deploy scripts (perhaps, Dockerize it?).
+- Better deploy scripts (perhaps, Dockerize it?). They're currently only 
+  suitable for the upspin2tweet app at upspin2tweet.com. It should be 
+  customizable for any user who wants to run their own app.
 
 
 Disclaimers: This code is provided as-is. It is in no way associated with my 
