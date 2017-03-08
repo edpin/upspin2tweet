@@ -5,7 +5,7 @@ Connects Upspin users to a Twitter account. See live app at
 
 This is work in progress and the code was put together over a weekend. Lots
 remain to clean it up and make it more presentable. Feel free to send me pull
-requests to clean up. In fact, I'd appreciate if you send fixes for errors and
+requests to clean up. In fact, I'd appreciate if you sent fixes for errors and
 omissions you may find, especially if they pertain to security.
 
 This is the full code backing up the live app, except for:
@@ -14,3 +14,7 @@ This is the full code backing up the live app, except for:
 - the reverse proxy configuration file (so we can run everything on port 443).
 
 
+Things TODO:
+- Pull out the HTML templates from the code.
+- Change a bunch of hard-coded paths in `main.go` to flags.
+- Better deploy scripts (perhaps, Dockerize it?).
