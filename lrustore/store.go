@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-
 	"expvar"
 	"fmt"
+
 	"upspin.io/cache"
 	"upspin.io/errors"
 	"upspin.io/key/sha256key"
@@ -59,8 +59,8 @@ func New(options ...string) (upspin.StoreServer, error) {
 			capacity: capacity,
 		},
 	}
-	// TODO: Because of this, only one instance is allowed. Add an instance
-	// tracker or a random number to the name.
+	// HACK/TODO: Because of this, only one instance is allowed. Move this to
+	// cmd/storeserver instead.
 	expvar.Publish("usage", s)
 	return s, nil
 }

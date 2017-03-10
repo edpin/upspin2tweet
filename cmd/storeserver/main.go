@@ -16,6 +16,8 @@ import (
 	"upspin.io/serverutil/perm"
 	"upspin.io/upspin"
 
+	_ "upspin.io/transports"
+
 	"upspin2tweet/lrustore"
 )
 
