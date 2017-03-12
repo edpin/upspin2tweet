@@ -5,6 +5,7 @@
 
 BIN=upspin2tweet
 ASSETS=assets
+TEMPLATES=template
 
 pushd ..
 #GOOS=linux GOARCH=amd64 CGO_ENABLED=0
@@ -13,6 +14,7 @@ upx $BIN
 
 
 rsync -avz -e ssh ./$ASSETS deploy@upspin2tweet.com:/var/www/
+rsync -avz -e ssh ./$TEMPLATES deploy@upspin2tweet.com:/var/www/
 scp $BIN deploy@upspin2tweet.com:/tmp
 ssh deploy@upspin2tweet.com "killall $BIN; cp /tmp/$BIN /var/www/$BIN; touch /tmp/errors; cd /var/www/; ./$BIN &>>/tmp/errors &"
 popd

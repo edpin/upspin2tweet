@@ -73,6 +73,7 @@
 <div class="row">
 <div class="col-md-2"></div>
 <div class="col-md-8">
+	<h5><a href="/privacy">Privacy Policy</a></h5>
 	<h6>
 	Upspin mascot <a href="https://upspin.io/doc/mascot.md">Augie</a> is
 	copyright by <a href="https://www.instagram.com/reneefrench/">Renne
