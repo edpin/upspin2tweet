@@ -142,12 +142,6 @@ func (s *server) startUpspinServer(ready chan struct{}) error {
 	if err != nil {
 		return err
 	}
-	store, err = perm.WrapStore(cfg, ready, store)
-	if err != nil {
-		return fmt.Errorf("error wrapping store: %s", err)
-	}
-	s.storeSrv = store
-
 	// Set up DirServer.
 	if err := os.MkdirAll(logDir, 0700); err != nil {
 		return err
@@ -156,10 +150,12 @@ func (s *server) startUpspinServer(ready chan struct{}) error {
 	if err != nil {
 		return err
 	}
-	dir, err = perm.WrapDir(cfg, ready, serverUser, dir)
-	if err != nil {
-		return err
-	}
+
+	// Wrap store and dir with permission checking.
+	perm := perm.NewWithDir(cfg, ready, serverUser, dir)
+	store = perm.WrapStore(store)
+	dir = perm.WrapDir(dir)
+	s.storeSrv = store
 
 	// Set up RPC server.
 	httpStore := storeserver.New(cfg, store, cfg.StoreEndpoint().NetAddr)
@@ -226,11 +222,6 @@ func (s *server) handleLogin(w http.ResponseWriter, r *http.Request) {
 	err := valid.UserName(userName)
 	if err != nil {
 		fmt.Fprintf(w, "Invalid upspin user name: %s", userName)
-		return
-	}
-	// Manually exclude access.All until issue #262 is fixed.
-	if userName == access.AllUsers {
-		fmt.Fprintf(w, "Invalid upspin user name all", userName)
 		return
 	}
 	_, err = s.keySrv.Lookup(userName)
