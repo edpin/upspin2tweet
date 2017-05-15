@@ -42,14 +42,15 @@ import (
 	_ "upspin.io/pack/eeintegrity"
 	_ "upspin.io/pack/plain"
 	_ "upspin.io/transports"
+	_ "upspin.io/cloud/storage/disk"
 )
 
 const (
 	domainBase      = "upspin2tweet.com"
 	serverUser      = "upspin@upspin2tweet.com"
-	logDir          = "/var/www/dirserver-logs"
-	upspinRoot      = "/var/www/upspinroot"
-	upspinConfigDir = "/var/www/upspin"
+	logDir          = "/var/www/upspin2tweet/dirserver-logs"
+	upspinRoot      = "/var/www/upspin2tweet/upspinroot"
+	upspinConfigDir = "/var/www/upspin2tweet/upspin"
 	port            = ":8443" // must match file upspinConfigDir+"/config".
 )
 
@@ -104,7 +105,7 @@ func main() {
 
 	// Set up HTTPS server.
 	opt := &https.Options{
-		LetsEncryptCache: "/etc/acme-cache/",
+		LetsEncryptCache: "/etc/acme-cache/upspin2tweet/",
 		LetsEncryptHosts: []string{domainBase, "upspin.upspin2tweet.com"},
 	}
 

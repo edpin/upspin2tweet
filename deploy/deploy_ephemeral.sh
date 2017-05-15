@@ -9,6 +9,6 @@ go build -ldflags="-s -w" || exit
 upx $BIN
 
 scp $BIN deploy@upspin2tweet.com:/tmp
-ssh deploy@upspin2tweet.com "killall $BIN; mv /tmp/$BIN /var/www/ephemeral/$BIN;"
-ssh deploy@upspin2tweet.com "touch /tmp/ephemeral_errors; /var/www/ephemeral/$BIN -kind=inprocess -letscache=/etc/acme-cache/ -config=/var/www/ephemeral/config -https=:9999 &>>/tmp/ephemeral_errors &"
+ssh deploy@upspin2tweet.com "killall $BIN; mv /tmp/$BIN /var/www/upspin2tweet/ephemeral/$BIN;"
+ssh deploy@upspin2tweet.com "touch /tmp/ephemeral_errors; /var/www/upspin2tweet/ephemeral/$BIN -kind=inprocess -letscache=/etc/acme-cache/upspin2tweet -config=/var/www/upspin2tweet/ephemeral/config -https=:9999 &>>/tmp/ephemeral_errors &"
 popd
