@@ -51,7 +51,7 @@ const (
 	logDir          = "/var/www/upspin2tweet/dirserver-logs"
 	upspinRoot      = "/var/www/upspin2tweet/upspinroot"
 	upspinConfigDir = "/var/www/upspin2tweet/upspin"
-	port            = ":8443" // must match file upspinConfigDir+"/config".
+	port            = ":8443"
 )
 
 type server struct {
@@ -105,6 +105,7 @@ func main() {
 
 	// Set up HTTPS server.
 	opt := &https.Options{
+		Addr: port,
 		LetsEncryptCache: "/etc/acme-cache/upspin2tweet/",
 		LetsEncryptHosts: []string{domainBase, "upspin.upspin2tweet.com"},
 	}
@@ -129,7 +130,7 @@ func main() {
 	go s.watchAndTweet()
 
 	log.Printf("Starting up...")
-	https.ListenAndServe(ready, "", port, opt)
+	https.ListenAndServe(ready, opt)
 }
 
 func (s *server) startUpspinServer(ready chan struct{}) error {

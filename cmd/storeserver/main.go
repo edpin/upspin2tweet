@@ -21,10 +21,8 @@ import (
 	"github.com/edpin/upspin2tweet/lrustore"
 )
 
-const serverName = "ephemeral"
-
 func main() {
-	flags.Parse("addr", "config", "https", "kind", "letscache", "log", "project", "serverconfig", "tls")
+	flags.Parse(flags.None, "addr", "config", "https", "kind", "letscache", "log", "serverconfig", "tls")
 
 	// Load configuration and keys for this server. It needs a real upspin username and keys.
 	cfg, err := config.FromFile(flags.Config)
@@ -51,5 +49,5 @@ func main() {
 
 	httpStore := storeserver.New(cfg, store, upspin.NetAddr(flags.NetAddr))
 	http.Handle("/api/Store/", httpStore)
-	https.ListenAndServeFromFlags(ready, serverName)
+	https.ListenAndServeFromFlags(ready)
 }
